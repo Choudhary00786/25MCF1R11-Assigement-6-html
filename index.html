@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creative Portfolio - Choudhary B.S.</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Great+Vibes&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #181824;
+      color: #f5f5fa;
+    }
+    
+    header {
+      position: sticky;
+      top: 0;
+      width: 95%;
+      background: #232341e0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5em 2.5em;
+      box-shadow: 0 2px 12px #23234140;
+    }
+    
+    .logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2em;
+      color: #ffad26;
+      text-shadow: 2px 2px 20px #ffd26cd0;
+      letter-spacing: 2px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1em;
+      margin: 0;
+    }
+    nav a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #f5f5fa;
+      text-decoration: none;
+      position: relative;
+      padding: 0.2em 0.5em;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    nav a:after {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 0;
+      left: 0;
+      bottom: -2px;
+      background: linear-gradient(90deg, #ffad26, #e72660);
+      transition: width 0.4s cubic-bezier(.5,0,.5,1);
+    }
+    nav a:hover:after, nav a:focus:after {
+      width: 100%;
+    }
+    nav a:hover {
+      color: #ffad26;
+    }
+    
+    .hero {
+      height: 85vh;
+      background: linear-gradient(115deg, #04d2c1 60%, #e72660 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3em;
+      font-weight: bold;
+      color: #ffad26;
+      text-shadow: 0 4px 32px #232341a0;
+      margin-bottom: 0.2em;
+      letter-spacing: 2px;
+    }
+    .hero-sub {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2em;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .18em solid #ffad26;
+      width: 0;
+      animation: typing 3.5s steps(30, end) forwards, blinking-cursor 1.2s infinite;
+      margin-bottom: 1em;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 16em }
+    }
+    @keyframes blinking-cursor {
+      from, to { border-color: transparent }
+      50% { border-color: #ffad26 }
+    }
+    
+    .cta-btn {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(90deg, #e72660 10%, #ffad26 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 1em 2.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px #001040a0;
+      animation: pulse 1.5s infinite;
+      position: relative;
+      outline: none;
+      transition: background 0.3s;
+      overflow: hidden;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 18px #001040a0; }
+      50% { transform: scale(1.08); box-shadow: 0 8px 36px #e7266020; }
+    }
+    
+    /* .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,170,80,0.39);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    } */
+    @keyframes ripple {
+      to { transform: scale(3); opacity: 0; }
+    }
+
+    .portfolio {
+      max-width: 1200px;
+      margin: 6em auto 2em auto;
+      padding: 0 2em;
+    }
+    .portfolio-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2em;
+      color: #e72660;
+      margin-bottom: 1.5em;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2.5em;
+    }
+    .project-card {
+      background: #232341;
+      border-radius: 13px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 8px #e7266030;
+      transition: box-shadow 0.3s, transform 0.3s;
+      cursor: pointer;
+      min-height: 420px;
+    }
+    .project-card:hover, .project-card:focus {
+      box-shadow: 0 20px 30px #e7266060;
+      transform: translateY(-10px) scale(1.04);
+    }
+    .project-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s;
+      filter: brightness(0.89);
+    }
+    .project-card:hover .project-img {
+      transform: scale(1.07);
+      filter: brightness(1);
+    }
+    .card-info {
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      padding: 1.3em 1em 1.2em 1.1em;
+      background: linear-gradient(0deg, #232341e8 80%, transparent 100%);
+      transition: bottom 0.4s;
+      color: #f5f5fa;
+      text-shadow: 1px 2px 8px #23234180;
+    }
+    .project-card:hover .card-info {
+      bottom: 0;
+    }
+
+    .services {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.services-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.service-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.service-item {
+  background: #100f0f;
+  padding: 20px;
+  border-radius: 15px;
+  width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.service-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.service-icon {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.service-item:hover .service-icon {
+  color: #ff5722;
+}
+
+.service-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.service-item p {
+  font-size: 0.95rem;
+  color: #555;
+}
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg); }
+    }
+    
+    .testimonials {
+      max-width: 900px;
+      margin: 6em auto;
+      padding: 0 2em;
+      text-align: center;
+    }
+    .testimonials-title {
+      font-size: 2em;
+      color: #e72660;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.1em;
+      letter-spacing: 1px;
+    }
+    .testimonial-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 2em;
+      padding: 1em 0;
+      scroll-snap-type: x mandatory;
+    }
+    .testimonial {
+      background: #232341;
+      border-radius: 16px;
+      padding: 2em 2em;
+      min-width: 340px;
+      scroll-snap-align: start;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.1em;
+      color: #ffd26c;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInSlide 1.1s forwards;
+    }
+    .testimonial:nth-child(1) { animation-delay: 0.2s; }
+    .testimonial:nth-child(2) { animation-delay: 0.5s; }
+    .testimonial:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    
+    .contact {
+      max-width: 800px;
+      margin: 6em auto;
+      padding: 0 2em;
+      text-align: center;
+    }
+    .contact-title {
+      font-size: 2em;
+      color: #ffad26;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.2em;
+      letter-spacing: 1.5px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+    }
+    input, textarea {
+      width: 80%;
+      padding: 1em;
+      border-radius: 7px;
+      border: none;
+      margin: 0.2em 0;
+      font-size: 1.1em;
+      background: #232341;
+      color: #fff;
+      box-shadow: 0 2px 8px #23234160;
+      font-family: 'Roboto', sans-serif;
+      transition: box-shadow 0.3s;
+    }
+    input:focus, textarea:focus {
+      box-shadow: 0 3px 16px #ffad26a0;
+      outline: none;
+    }
+    .submit-btn {
+      background: #e72660;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      padding: 1em 3em;
+      border-radius: 40px;
+      border: none;
+      font-size: 1.1em;
+      margin-top: 0.5em;
+      box-shadow: 0 4px 16px #e7266060;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+      outline: none;
+    }
+    .submit-btn:hover {
+      box-shadow: 0 0 32px #ffad26d0, 0 4px 16px #e7266060;
+      animation: glow 1.2s infinite;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 32px #ffad26d0;}
+      50% { box-shadow: 0 0 52px #e72660d0;}
+      100%{ box-shadow: 0 0 32px #ffad26d0;}
+    }
+    .shake {
+      animation: shakeIt 0.4s;
+    }
+    @keyframes shakeIt {
+      0%,100% { transform: translateX(0);}
+      25%,75% { transform: translateX(-10px);}
+      50% { transform: translateX(10px);}
+    }
+    
+    footer {
+      background: #232341;
+      padding: 2em 0 1em 0;
+      text-align: center;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      margin-top: 3em;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.8em;
+      margin: 0.8em 0 1.2em 0;
+    }
+    .social-icons a {
+      color: #ffad26;
+      font-size: 2em;
+      transition: color 0.25s, transform 0.3s;
+    }
+    .social-icons a:hover {
+      color: #e72660;
+      animation: bounce 0.7s;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0);}
+      30% { transform: translateY(-22px);}
+      50% { transform: translateY(0);}
+      70% { transform: translateY(-12px);}
+    }
+    
+    @media (max-width: 900px) {
+      .portfolio-grid { grid-template-columns: 1fr 1fr;}
+      .service-icons { gap: 2em;}
+    }
+    @media (max-width: 600px) {
+      header { flex-direction: column; padding: 1em 1em;}
+      nav ul { gap: 1.2em;}
+      .logo { margin-bottom: 0.7em;}
+      .portfolio-grid { grid-template-columns: 1fr;}
+      .testimonial-slider { flex-direction: column;}
+      .service-icons { flex-direction: column; align-items: center;}
+      .service-icon { margin-bottom: 1em;}
+    }
+  </style>
+</head>
+<body>
+  
+  <header>
+    <div class="logo">Choudhary Studio</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <section class="hero" id="home">
+    <div class="hero-title">Innovative Web Solutions</div>
+    <div class="hero-sub">Choudhary Studio experiences...</div>
+    <button class="cta-btn" id="ctaBtn">Know More</button>
+  </section>
+
+
+  <section class="portfolio" id="portfolio">
+    <div class="portfolio-title">My Portfolio</div>
+    <div class="portfolio-grid">
+      
+      <div class="project-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6VHaxYWSykfeRKUBfnoFAdVAswAsN5AnIHA&s" alt="Project 1" class="project-img">
+        <div class="card-info">Modern Landing Page</div>
+      </div>
+      <div class="project-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXq-RJdWGH1I6hIuRWZtwtHOfagEuKJTqu1Q&s" alt="Project 2" class="project-img">
+        <div class="card-info">E-commerce Platform</div>
+      </div>
+      <div class="project-card">
+        <img src="https://uicookies.com/wp-content/uploads/2020/11/Sunzine.jpg" alt="Project 3" class="project-img">
+        <div class="card-info">Portfolio Gallery</div>
+      </div>
+      <div class="project-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsqwP8ArUOmVGrUQXxdz8V3IbCHLFleTMoZg&s" alt="Project 4" class="project-img">
+        <div class="card-info">About Site</div>
+      </div>
+      <div class="project-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJUJl6CCNCM6enoUC5IgrUlFxJwhXCweJKew&s" alt="Project 5" class="project-img">
+        <div class="card-info">Dashboard UI</div>
+      </div>
+      <div class="project-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVJaYZ_3qK4IyEnysAtXedXS-zbPlsouVjJ_7VHpeyisdI4pe_0UzJNPrqPKWn_euy9NI&usqp=CAU" alt="Project 6" class="project-img">
+        <div class="card-info">Interactive Forms</div>
+      </div>
+    </div>
+  </section>
+
+<section class="services" id="services">
+  <div class="services-title">What I Offer</div>
+  <div class="service-icons">
+    <div class="service-item">
+      <div class="service-icon"><i class="fas fa-code"></i></div>
+      <h3>Web Development</h3>
+      <p>Modern, responsive, and fast websites using the latest technologies.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+      <h3>UI/UX Design</h3>
+      <p>Beautiful and user-friendly designs that engage and inspire.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3>App Development</h3>
+      <p>Mobile-first applications with smooth performance and style.</p>
+    </div>
+  </div>
+</section>
+
+  <section class="testimonials" id="about">
+    <div class="testimonials-title">Testimonials</div>
+    <div class="testimonial-slider">
+      <div class="testimonial">“Outstanding work, creative and prompt. Will hire again!”</div>
+      <div class="testimonial">“The animations make my website stand out. Highly recommended!”</div>
+      <div class="testimonial">“Delivered a visually beautiful and fast-loading site.”</div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-title">Let's Connect</div>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Name">
+      <input type="email" id="email" placeholder="Email">
+      <textarea id="message" rows="4" placeholder="Message"></textarea>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </section>
+
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/"><i class="fab fa-facebook ball"></i></a>
+      <a href="https://x.com/"><i class="fab fa-twitter ball"></i></a>
+      <a href="https://www.instagram.com/"><i class="fab fa-instagram ball"></i></a>
+      <a href="https://www.linkedin.com/login"><i class="fab fa-linkedin ball"></i></a>
+      <a href="https://github.com/"><i class="fab fa-github ball"></i></a>
+    </div>
+    <div>&copy; 2025 Choudhary Studio. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
